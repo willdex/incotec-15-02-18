@@ -1,7 +1,7 @@
-  @extends ('layouts.cpanelp')
-@section ('contenido') 
+  
+<?php $__env->startSection('contenido'); ?> 
 
-@include('escritorio.modal')
+<?php echo $__env->make('escritorio.modal', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 
 
 <div class="container">
@@ -13,7 +13,7 @@
 
 
 
-@if(Auth::user()->privilegio != 1)
+<?php if(Auth::user()->privilegio != 1): ?>
 
     <div class="col-lg-6">
 
@@ -21,7 +21,7 @@
 
             
             <h3><i class="fa fa-star" aria-hidden="true" style="color: #FACB14;"></i> Convocatorias Adjudicadas
-             <a href="{!!URL::to('convocatoriasaprobadas')!!}"> <button class="btn btn-primary pull-right" style="font-size: 15px; background-color: black; border-color: black;">Ver Todas</button></a>
+             <a href="<?php echo URL::to('convocatoriasaprobadas'); ?>"> <button class="btn btn-primary pull-right" style="font-size: 15px; background-color: black; border-color: black;">Ver Todas</button></a>
             </h3> 
             
             <br>
@@ -37,15 +37,15 @@
             <th style="font-size: 16px;"><center>Opciones</center></th>
           </thead>
           <tbody align="center" id="body_empresa">          
-       @foreach($sql as $mov)
+       <?php foreach($sql as $mov): ?>
           <tr>
-            <td style="font-size: 15px;">{{$mov->titulo}}</td>          
-            <td style="font-size: 15px;">{{$mov->nombre}}</td>
-            <td style="font-size: 15px;">{{$mov->fecha_ad}}</td>
-            <td style="font-size: 15px;"> <a href="{!! nl2br(e($mov->descripcion)) !!}"><button class="btn btn-primary" style="font-size: 14px;"><i class="fa fa-download" aria-hidden="true" style="font-size: 18px;"></i> DESCARGAR</button></a>
+            <td style="font-size: 15px;"><?php echo e($mov->titulo); ?></td>          
+            <td style="font-size: 15px;"><?php echo e($mov->nombre); ?></td>
+            <td style="font-size: 15px;"><?php echo e($mov->fecha_ad); ?></td>
+            <td style="font-size: 15px;"> <a href="<?php echo nl2br(e($mov->descripcion)); ?>"><button class="btn btn-primary" style="font-size: 14px;"><i class="fa fa-download" aria-hidden="true" style="font-size: 18px;"></i> DESCARGAR</button></a>
             </td>
           </tr>
-        @endforeach
+        <?php endforeach; ?>
           </tbody>          
       </table>
 
@@ -55,16 +55,17 @@
 
     </div>
 
- @endif  
+ <?php endif; ?>  
 
 
-@if(Auth::user()->privilegio != 1)
+<?php if(Auth::user()->privilegio != 1): ?>
 
       <div class="col-lg-6">
 
         <h3> Envíanos tu consulta </h3>
 
-        {!!Form::open(['route'=>'consulta.store', 'method'=>'POST'])!!}
+        <?php echo Form::open(['route'=>'consulta.store', 'method'=>'POST']); ?>
+
 
           <div class="form-group">
 
@@ -84,14 +85,15 @@
 
           <button class="btn btn-lg btn-primary" type="submit" id="btnc" name="btnc">ENVIAR</button> <br><br>
  
-        {!!Form::close()!!}
+        <?php echo Form::close(); ?>
 
-        @include('alerts.success')
-        @include('alerts.errors')
+
+        <?php echo $__env->make('alerts.success', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+        <?php echo $__env->make('alerts.errors', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 
       </div>
 
-@endif
+<?php endif; ?>
 
 
 
@@ -101,7 +103,7 @@
 
 
 
-@if(Auth::user()->privilegio == 1)
+<?php if(Auth::user()->privilegio == 1): ?>
 
 
         <div class="col-lg-1"></div>
@@ -111,9 +113,9 @@
           <div class="small-box bg-blue">
             <div class="inner">
               <?php  $nro = DB::select('select COUNT(*) as cant From convocatoria'); ?>
-                @foreach($nro as $res)
-                  <h3>{{$res->cant}}</h3>
-                @endforeach
+                <?php foreach($nro as $res): ?>
+                  <h3><?php echo e($res->cant); ?></h3>
+                <?php endforeach; ?>
               <p style="font-size: 18px;">Convocatorias</p>
             </div>
 
@@ -132,16 +134,16 @@
           <div class="small-box bg-black">
             <div class="inner">
               <?php  $nro2 = DB::select('SELECT COUNT(*) as cant FROM convocatoria WHERE estado="activa" or estado="parcial"'); ?>
-                @foreach($nro2 as $res2)
-                  <h3>{{$res2->cant}}</h3>
-                @endforeach
+                <?php foreach($nro2 as $res2): ?>
+                  <h3><?php echo e($res2->cant); ?></h3>
+                <?php endforeach; ?>
               <p style="font-size: 18px;">Activas-Parciales</p>
             </div>
 
             <div class="icon">
               <i class="fa fa-file-text-o" aria-hidden="true"></i>
             </div>
-            <a href="{!!URL::to('convocatoriasactivas')!!}" class="small-box-footer" style="font-size: 17px;">Ver Todas <i class="fa fa-plus-circle" aria-hidden="true"></i></a>
+            <a href="<?php echo URL::to('convocatoriasactivas'); ?>" class="small-box-footer" style="font-size: 17px;">Ver Todas <i class="fa fa-plus-circle" aria-hidden="true"></i></a>
           </div>
           
         </div>
@@ -151,16 +153,16 @@
           <div class="small-box bg-red">
             <div class="inner">
               <?php  $nro2 = DB::select('SELECT COUNT(*) as cant FROM convocatoria WHERE estado="inactiva"'); ?>
-                @foreach($nro2 as $res2)
-                  <h3>{{$res2->cant}}</h3>
-                @endforeach
+                <?php foreach($nro2 as $res2): ?>
+                  <h3><?php echo e($res2->cant); ?></h3>
+                <?php endforeach; ?>
               <p style="font-size: 18px;">Inactivas</p>
             </div>
 
             <div class="icon">
               <i class="fa fa-file-text-o" aria-hidden="true"></i>
             </div>
-            <a href="{!!URL::to('convocatoriasinactivas')!!}" class="small-box-footer" style="font-size: 17px;">Ver Todas <i class="fa fa-plus-circle" aria-hidden="true"></i></a>
+            <a href="<?php echo URL::to('convocatoriasinactivas'); ?>" class="small-box-footer" style="font-size: 17px;">Ver Todas <i class="fa fa-plus-circle" aria-hidden="true"></i></a>
           </div>
           
         </div>
@@ -170,14 +172,14 @@
 
   <div class="col-lg-6">
 
-          @include('alerts.success')
-          @include('alerts.errors')
+          <?php echo $__env->make('alerts.success', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+          <?php echo $__env->make('alerts.errors', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 
         <?php  $sql = DB::select('select nombre, idpublic, titulo, descripcion, DATE_FORMAT(fecha,"%d-%m-%Y") AS fecha, estado FROM categoria, convocatoria WHERE categoria.idcat=convocatoria.idcat and convocatoria.estado<>"inactiva" Order by fecha desc LIMIT 7'); ?>
 
           <div>
             <h3> Últimas Convocatorias </h3> 
-             <!--<a href="{!!URL::to('convocatoriasaprobadas')!!}"> <button class="btn btn-primary pull-right" style="font-size: 15px; background-color: black; border-color: black;">Ver Todas</button></a> -->
+             <!--<a href="<?php echo URL::to('convocatoriasaprobadas'); ?>"> <button class="btn btn-primary pull-right" style="font-size: 15px; background-color: black; border-color: black;">Ver Todas</button></a> -->
           </div>
           
 
@@ -192,15 +194,15 @@
             <th style="font-size: 16px;"><center>Opciones</center></th>
           </thead>
           <tbody align="center" id="body_empresa">          
-       @foreach($sql as $mov)
+       <?php foreach($sql as $mov): ?>
           <tr>
-            <td style="font-size: 15px;">{{$mov->titulo}}</td>          
-            <td style="font-size: 15px;">{{$mov->nombre}}</td>
-            <td style="font-size: 15px;">{{$mov->fecha}}</td>
-            <td style="font-size: 15px;"> <a href="{!! nl2br(e($mov->descripcion)) !!}"><button class="btn btn-primary" style="font-size: 14px;"><i class="fa fa-download" aria-hidden="true" style="font-size: 18px;"></i> DESCARGAR</button></a>
+            <td style="font-size: 15px;"><?php echo e($mov->titulo); ?></td>          
+            <td style="font-size: 15px;"><?php echo e($mov->nombre); ?></td>
+            <td style="font-size: 15px;"><?php echo e($mov->fecha); ?></td>
+            <td style="font-size: 15px;"> <a href="<?php echo nl2br(e($mov->descripcion)); ?>"><button class="btn btn-primary" style="font-size: 14px;"><i class="fa fa-download" aria-hidden="true" style="font-size: 18px;"></i> DESCARGAR</button></a>
             </td>
           </tr>
-        @endforeach
+        <?php endforeach; ?>
           </tbody>          
       </table>
 
@@ -209,7 +211,7 @@
 
   </div>
 
-@endif  
+<?php endif; ?>  
 
 
 
@@ -220,4 +222,6 @@
 </div>
 
 
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.cpanelp', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

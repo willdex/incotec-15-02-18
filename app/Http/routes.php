@@ -44,6 +44,10 @@ Route::resource('ayudaemail','AyudaEmailController@index');
 Route::resource('proveedores','ProveedoresController');
 
 
+//--registrar proveedor ruta para REGISTRO DE PROVEEDORES 15-02-18 !!Daniel Alanis
+Route::resource('registrosproveedor','RegistrosProveedorController');
+///
+
 
 
 
