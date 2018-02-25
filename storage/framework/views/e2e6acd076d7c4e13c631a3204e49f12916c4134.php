@@ -1,13 +1,13 @@
-  @extends ('layouts.cpanelp')
-@section ('contenido') 
+  
+<?php $__env->startSection('contenido'); ?> 
 
-@include('convocatoriasactivas.modal')
-@include('convocatoriasactivas.modalP')
-@include('convocatoriasactivas.modalA')
+<?php echo $__env->make('convocatoriasactivas.modal', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<?php echo $__env->make('convocatoriasactivas.modalP', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<?php echo $__env->make('convocatoriasactivas.modalA', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 
 
 
-@if(Auth::user()->privilegio == 1)
+<?php if(Auth::user()->privilegio == 1): ?>
 
   <div class="row">
 
@@ -19,16 +19,16 @@
         <div class="small-box bg-yellow">
             <div class="inner">
               <?php  $nro2 = DB::select('SELECT COUNT(*) as cant FROM convocatoria WHERE estado="parcial"'); ?>
-                @foreach($nro2 as $res2)
-                  <h3>{{$res2->cant}}</h3>
-                @endforeach
+                <?php foreach($nro2 as $res2): ?>
+                  <h3><?php echo e($res2->cant); ?></h3>
+                <?php endforeach; ?>
               <p style="font-size: 17px;">Adjudicación Parcial</p>
             </div>
 
             <div class="icon">
               <i class="fa fa-file-text-o" aria-hidden="true"></i>
             </div>
-            <a href="{!!URL::to('parciales')!!}" class="small-box-footer" style="font-size: 15px;">Ver Todas <i class="fa fa-plus-circle" aria-hidden="true"></i></a>
+            <a href="<?php echo URL::to('parciales'); ?>" class="small-box-footer" style="font-size: 15px;">Ver Todas <i class="fa fa-plus-circle" aria-hidden="true"></i></a>
         </div>
           
     </div>
@@ -38,7 +38,7 @@
 
   </div>
 
-@endif 
+<?php endif; ?> 
 
    <script src="js/sistemalaravel.js"></script>
 
@@ -54,7 +54,7 @@
         <center> <h2 style="text-transform: uppercase; font-weight: bold;"> Convocatorias Activas </h2> </center>
 
 
-@if(Auth::user()->privilegio != 1)
+<?php if(Auth::user()->privilegio != 1): ?>
 
       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="table-responsive" style="overflow-x:inherit">
@@ -68,26 +68,26 @@
             <th style="font-size: 16px;"><center>Opciones</center></th>
           </thead>
           <tbody align="center" id="body_empresa">          
-          @foreach($sql as $mov)
+          <?php foreach($sql as $mov): ?>
           <tr>
-            <td style="font-size: 15px;">{{$mov->titulo}}</td>          
-            <td style="font-size: 15px;">{{$mov->nombre}}</td>
-            <td style="font-size: 15px;">{{$mov->fecha}}</td>
-            <td style="font-size: 15px;"> <a href="{!! nl2br(e($mov->descripcion)) !!}"><button class="btn btn-primary" style="font-size: 14px;"><i class="fa fa-download" aria-hidden="true" style="font-size: 18px;"></i> DESCARGAR</button></a> 
+            <td style="font-size: 15px;"><?php echo e($mov->titulo); ?></td>          
+            <td style="font-size: 15px;"><?php echo e($mov->nombre); ?></td>
+            <td style="font-size: 15px;"><?php echo e($mov->fecha); ?></td>
+            <td style="font-size: 15px;"> <a href="<?php echo nl2br(e($mov->descripcion)); ?>"><button class="btn btn-primary" style="font-size: 14px;"><i class="fa fa-download" aria-hidden="true" style="font-size: 18px;"></i> DESCARGAR</button></a> 
             <a href="#" class="small-box-footer" style="font-size: 17px;" data-toggle="modal" data-target="#ModalAdjuntar"><button class='btn btn-primary' style='background-color: black; font-size: 15px;'>Enviar Propuesta</button></a>
             </td>
           </tr>
-          @endforeach
+          <?php endforeach; ?>
           </tbody>          
       </table>
 
-      <div class="pull-left"> {!!$sql->render()!!}  </div>
+      <div class="pull-left"> <?php echo $sql->render(); ?>  </div>
 
       </div>
     </div>
 
 
-@endif 
+<?php endif; ?> 
 
 
 
@@ -95,20 +95,20 @@
 
 
 
-@if(Auth::user()->privilegio == 1)
+<?php if(Auth::user()->privilegio == 1): ?>
 
 
     
   <div class="col-lg-6">
 
-          @include('alerts.success')
-          @include('alerts.errors')
+          <?php echo $__env->make('alerts.success', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+          <?php echo $__env->make('alerts.errors', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 
         <?php  $sql = DB::select('select nombre, idpublic, titulo, descripcion, DATE_FORMAT(fecha,"%d-%m-%Y") AS fecha, estado FROM categoria, convocatoria WHERE categoria.idcat=convocatoria.idcat and convocatoria.estado<>"inactiva" Order by fecha '); ?>
 
           <div>
             <h3> Últimas Convocatorias </h3> 
-             <!--<a href="{!!URL::to('convocatoriasaprobadas')!!}"> <button class="btn btn-primary pull-right" style="font-size: 15px; background-color: black; border-color: black;">Ver Todas</button></a> -->
+             <!--<a href="<?php echo URL::to('convocatoriasaprobadas'); ?>"> <button class="btn btn-primary pull-right" style="font-size: 15px; background-color: black; border-color: black;">Ver Todas</button></a> -->
           </div>
           
 
@@ -123,17 +123,17 @@
             <th style="font-size: 16px;"><center>Opciones</center></th>
           </thead>
           <tbody align="center" id="body_empresa">          
-       @foreach($sql as $mov)
+       <?php foreach($sql as $mov): ?>
           <tr>
-            <td style="font-size: 15px;">{{$mov->titulo}}</td>          
-            <td style="font-size: 15px;">{{$mov->nombre}}</td>
-            <td style="font-size: 15px;">{{$mov->fecha}}</td>
-            <td style="font-size: 15px;"> <a href="{!! nl2br(e($mov->descripcion)) !!}"><button class="btn btn-primary" style="font-size: 14px;"><i class="fa fa-download" aria-hidden="true" style="font-size: 18px;"></i> DESCARGAR</button></a>
+            <td style="font-size: 15px;"><?php echo e($mov->titulo); ?></td>          
+            <td style="font-size: 15px;"><?php echo e($mov->nombre); ?></td>
+            <td style="font-size: 15px;"><?php echo e($mov->fecha); ?></td>
+            <td style="font-size: 15px;"> <a href="<?php echo nl2br(e($mov->descripcion)); ?>"><button class="btn btn-primary" style="font-size: 14px;"><i class="fa fa-download" aria-hidden="true" style="font-size: 18px;"></i> DESCARGAR</button></a>
 
             </td>
 
           </tr>
-        @endforeach
+        <?php endforeach; ?>
           </tbody>          
       </table>
 
@@ -142,7 +142,7 @@
 
   </div>
 
-@endif 
+<?php endif; ?> 
 
 
 </div>
@@ -154,6 +154,9 @@
 
   </div>
 
-  {!!Html::script('js/jsmodal.js')!!}
+  <?php echo Html::script('js/jsmodal.js'); ?>
 
-@endsection
+
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.cpanelp', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
