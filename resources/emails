@@ -4,8 +4,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <!--[if !mso]><!-->
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="stylesheet" href="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
 <!--<![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   <script src="js/sistemalaravel.js"></script>
+
 <title></title>
 <style type="text/css">
 * {

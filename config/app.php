@@ -149,7 +149,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
- 
+
 
         /*
          * Package Service Providers...
@@ -163,6 +163,7 @@ return [
         App\Providers\AuthServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        Barryvdh\Debugbar\ServiceProvider::class,
 
         //ESTO AUMENTE PARA Q FUNCIONE EL html
         Collective\Html\HtmlServiceProvider::class,
@@ -216,6 +217,7 @@ return [
         //ESTO AUMENTE PARA Q RECONOSCA LOS html                
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,        
+        'Debugbar' => Barryvdh\Debugbar\Facade::class,
 
     ],
 

@@ -9,6 +9,7 @@ use Mail;
 use Session;
 use Redirect;
 use DB;
+use Storage;
 
  
 class MailController extends Controller

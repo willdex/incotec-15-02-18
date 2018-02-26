@@ -49,14 +49,14 @@ class CorreoController extends Controller
     }
 
     
-    $destinatario=$request->input("destinatario");
-    $asunto=$request->input("asunto");
+    $destinatario='compras@incotec.cc';
+    $asunto='Mensaje de Propuest';
     $contenido=$request->input("contenido_mail");
 
    
     $data = array('contenido' => $contenido);
- $r= Mail::send('correo.plantilla_correo', $data, function ($message) use ($asunto,$destinatario,  $containfile,$pathToFile) {
-        $message->from('compras@incotec.cc', 'li');
+ $r= Mail::send('convocatoriasactivas.plantilla_correo', $data, function ($message) use ($asunto,$destinatario,  $containfile,$pathToFile) {
+        $message->from('compras@incotec.cc', 'Propuesta de Proveedor');
         $message->to($destinatario)->subject($asunto);
        if($containfile){
         $message->attach($pathToFile);

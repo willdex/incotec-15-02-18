@@ -27,6 +27,7 @@ Route::post('cerrar','ConvocatoriasActivasController@cerrar_convocatoria');
 Route::resource('convocatoriasinactivas','ConvocatoriasInactivasController');
 
 Route::get("convocatorias/{id}","ConvocatoriasController@covocatorias");
+
 Route::resource('convocatorias','ConvocatoriasController');
 
 Route::resource("perfil","PerfilController");
@@ -47,11 +48,13 @@ Route::resource('proveedores','ProveedoresController');
 //--registrar proveedor ruta para REGISTRO DE PROVEEDORES 15-02-18 !!Daniel Alanis
 Route::resource('registrosproveedor','RegistrosProveedorController');
 ///
+
+
 //* adjuntar archivos willians d.
+
 Route::get('form_enviar_correo', 'CorreoController@crear');
 Route::post('enviar_correo', 'CorreoController@enviar');
 Route::post('cargar_archivo_correo', 'CorreoController@store');
-
 
 
 

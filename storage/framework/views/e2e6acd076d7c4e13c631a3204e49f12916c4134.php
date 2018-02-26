@@ -82,6 +82,7 @@
       </table>
 
       <div class="pull-left"> <?php echo $sql->render(); ?>  </div>
+   <script src="js/sistemalaravel.js"></script>
 
       </div>
     </div>
