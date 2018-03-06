@@ -33,11 +33,11 @@
 
 <body class="body">
 
-<div class="titulo" > <h1>Información Plusis</h1></div>
+<div class="titulo" > <h1>Propuesta Recibida</h1></div>
 <hr>
 <div class=".div_contenido" > <?= $contenido;   ?></div>
 
-<div class=".div_contenido" > Gracias por participar en el proyecto plusis <br/> NO OLVIDE VISITAR NUESTRO SISTIO WEB <b>http://plusis.net</b> </div>
+<div class=".div_contenido" >Sistema de Compras Incotec <br/> Se ha recibido la siguiente propuesta desde <b>https://licitaciones.incotec.com.bo</b> </div>
 	
 </body>
 </html>

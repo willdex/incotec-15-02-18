@@ -25,11 +25,12 @@ class RegistrosProveedorFormRequest extends Request
     {
         return [
             'correo' => 'required',
-            'password'=>'required',
+           // 'password'=>'required',
             'proveedor'=>'required',
             'telefono'=>'required',
             'direccion'=>'required',
 
+            'idcat'=>'required',
         ];
     }
 }

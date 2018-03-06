@@ -1,6 +1,11 @@
   @extends ('layouts.cpanelp')
 @section ('contenido') 
 
+@include('convocatoriasactivas.modal')
+@include('convocatoriasactivas.modalP')
+@include('convocatoriasactivas.modalA')
+
+
   <div class="row">
 
 
@@ -8,7 +13,7 @@
     </div>
 
 
-@if(Auth::user()->privilegio != 1)
+@if((Auth::user()->privilegio != 1)||(Auth::user()->privilegio != 2))
 
   <div class="col-lg-10">  
 
@@ -37,7 +42,7 @@
             <td style="font-size: 15px;">{{$mov->nombre}}</td>
             <td style="font-size: 15px;">{{$mov->fecha}}</td>
             <td style="font-size: 15px;"> <a href="{!! nl2br(e($mov->descripcion)) !!}"><button class="btn btn-primary" style="font-size: 14px;"><i class="fa fa-download" aria-hidden="true" style="font-size: 18px;"></i> DESCARGAR</button></a> 
-            <a href='mailto:compras@incotec.cc'><button class='btn btn-primary' style='background-color: black; font-size: 14px;'>Enviar Propuesta</button></a>
+            <a href="#" class="small-box-footer" style="font-size: 17px;" data-toggle="modal" data-target="#ModalAdjuntar"><button class='btn btn-primary' style='background-color: black; font-size: 15px;'>Enviar Propuesta</button></a>
             </td>
           </tr>
           @endforeach
@@ -59,7 +64,7 @@
 <!-- //////////////////////////////////////// A D M I N //////////////////////////////////////////////////////// -->
 
 
-@if(Auth::user()->privilegio == 1)
+@if((Auth::user()->privilegio == 1) || (Auth::user()->privilegio == 2))
 
   <div class="col-lg-10">  
 

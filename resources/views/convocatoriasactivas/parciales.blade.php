@@ -8,7 +8,7 @@
 
   <div class="row">
 
-  @if(Auth::user()->privilegio == 1)
+  @if((Auth::user()->privilegio == 1) || (Auth::user()->privilegio == 2))
 
     <div class="col-lg-1">  
     </div>

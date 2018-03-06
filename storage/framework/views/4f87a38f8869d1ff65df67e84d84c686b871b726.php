@@ -1,5 +1,5 @@
-  @extends ('layouts.cpanelp')
-@section ('contenido') 
+  
+<?php $__env->startSection('contenido'); ?> 
 
 
 <div class="row">
@@ -13,7 +13,7 @@
         
         <center> <h2 style="text-transform: uppercase; font-weight: bold;"> Convocatorias Adjudicadas </h2> </center>
 
-@if((Auth::user()->privilegio != 1)||(Auth::user()->privilegio != 2))
+<?php if((Auth::user()->privilegio != 1)||(Auth::user()->privilegio != 2)): ?>
 
       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="table-responsive" style="overflow-x:inherit">
@@ -26,29 +26,29 @@
             <th style="font-size: 16px;"><center>Opciones</center></th>
           </thead>
           <tbody align="center" id="body_empresa">          
-        @foreach($sql as $mov)
+        <?php foreach($sql as $mov): ?>
           <tr>
-            <td style="font-size: 15px;">{{$mov->titulo}}</td>          
-            <td style="font-size: 15px;">{{$mov->nombre}}</td>
-            <td style="font-size: 15px;">{{$mov->fecha_ad}}</td>
-            <td style="font-size: 15px;"> <a href="{!! nl2br(e($mov->descripcion)) !!}"><button class="btn btn-primary" style="font-size: 14px;"><i class="fa fa-download" aria-hidden="true" style="font-size: 18px;"></i> DESCARGAR</button></a>
+            <td style="font-size: 15px;"><?php echo e($mov->titulo); ?></td>          
+            <td style="font-size: 15px;"><?php echo e($mov->nombre); ?></td>
+            <td style="font-size: 15px;"><?php echo e($mov->fecha_ad); ?></td>
+            <td style="font-size: 15px;"> <a href="<?php echo nl2br(e($mov->descripcion)); ?>"><button class="btn btn-primary" style="font-size: 14px;"><i class="fa fa-download" aria-hidden="true" style="font-size: 18px;"></i> DESCARGAR</button></a>
             </td>
           </tr>
-        @endforeach
+        <?php endforeach; ?>
           </tbody>          
       </table>
 
-      <div class="pull-left">  {!!$sql->render()!!}  </div>
+      <div class="pull-left">  <?php echo $sql->render(); ?>  </div>
 
       </div>
     </div>
 
-@endif 
+<?php endif; ?> 
 
 
 
 
-@if((Auth::user()->privilegio == 1) || (Auth::user()->privilegio == 2))
+<?php if((Auth::user()->privilegio == 1) || (Auth::user()->privilegio == 2)): ?>
 
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
       <div class="table-responsive" style="overflow-x:inherit">
@@ -62,27 +62,27 @@
             <th style="font-size: 16px;"><center>Opciones</center></th>
           </thead>
           <tbody align="center" id="body_empresa">          
-          @foreach($sqlAdm as $movAdm)
+          <?php foreach($sqlAdm as $movAdm): ?>
           <tr>
-            <td style="font-size: 15px;">{{$movAdm->titulo}}</td>
-            <td style="font-size: 15px;">{{$movAdm->nombre}}</td>          
-            <td style="font-size: 15px;">{{$movAdm->proveedor}}</td>
-            <td style="font-size: 15px;">{{$movAdm->fecha_ad}}</td>
-            <td style="font-size: 15px;"> <a href="{!! nl2br(e($movAdm->descripcion)) !!}"><button class="btn btn-primary" style="font-size: 14px;"><i class="fa fa-download" aria-hidden="true" style="font-size: 18px;"></i> DESCARGAR</button></a>
+            <td style="font-size: 15px;"><?php echo e($movAdm->titulo); ?></td>
+            <td style="font-size: 15px;"><?php echo e($movAdm->nombre); ?></td>          
+            <td style="font-size: 15px;"><?php echo e($movAdm->proveedor); ?></td>
+            <td style="font-size: 15px;"><?php echo e($movAdm->fecha_ad); ?></td>
+            <td style="font-size: 15px;"> <a href="<?php echo nl2br(e($movAdm->descripcion)); ?>"><button class="btn btn-primary" style="font-size: 14px;"><i class="fa fa-download" aria-hidden="true" style="font-size: 18px;"></i> DESCARGAR</button></a>
             </td>
           </tr>
-          @endforeach
+          <?php endforeach; ?>
           </tbody>          
       </table>
 
-      <div class="pull-left">  {!!$sqlAdm->render()!!}  </div>
+      <div class="pull-left">  <?php echo $sqlAdm->render(); ?>  </div>
 
       </div>
     </div>
 
 
 
-@endif 
+<?php endif; ?> 
 
   </div>
 
@@ -93,4 +93,5 @@
 
 </div>
 
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.cpanelp', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

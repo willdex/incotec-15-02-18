@@ -1,20 +1,22 @@
- @extends ('layouts.cpanelp')
-@section ('contenido')
+ 
+<?php $__env->startSection('contenido'); ?>
 	<div class="row">
 		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 			<h3>Nuevo Proveedor</h3>
-			@if(count($errors)>0)
+			<?php if(count($errors)>0): ?>
 			<div class="alert alert-danger">
 				<ul>
-				@foreach ($errors->all() as $error)
-					<li>{{$error}}</li>
-				@endforeach
+				<?php foreach($errors->all() as $error): ?>
+					<li><?php echo e($error); ?></li>
+				<?php endforeach; ?>
 				</ul>
 			</div>
-			@endif
+			<?php endif; ?>
 
-			{!!Form::open(array('url'=>'registrosproveedor','method'=>'POST','autocomplete'=>'off'))!!}
-			{{Form::token()}}
+			<?php echo Form::open(array('url'=>'registrosproveedor','method'=>'POST','autocomplete'=>'off')); ?>
+
+			<?php echo e(Form::token()); ?>
+
 			<div class="form-group">
 				<label for="correo">Correo</label>
 				<input type="text" name="correo" class="form-control" placeholder="Correo...">
@@ -44,9 +46,9 @@
 					<div class="form-group">
 						<label>Categoria</label>
 						<select name="pidcat" id="pidcat" class="form-control selectpicker" data-live-search="true">
-							@foreach($categorias as $categoria)
-							<option value="{{$categoria->idcat}}">{{$categoria->nombre}}</option>
-							@endforeach
+							<?php foreach($categorias as $categoria): ?>
+							<option value="<?php echo e($categoria->idcat); ?>"><?php echo e($categoria->nombre); ?></option>
+							<?php endforeach; ?>
 						</select>
 					</div>
 				</div>
@@ -72,16 +74,17 @@
 
 		<div class="col-lg-6 col-sm-6 col-md-6 col-xs-12" id="guardar">
 			<div class="form-group">
-				<input name="_token" value="{{ csrf_token() }}"  type="hidden"></div>
+				<input name="_token" value="<?php echo e(csrf_token()); ?>"  type="hidden"></div>
 				<button class="btn btn-primary" type="submit">Guardar</button>
 				<button class="btn btn-danger" type="reset">Cancelar</button>
 			</div>
 		</div>
 	</div>
 
-			{!!Form::close()!!}
+			<?php echo Form::close(); ?>
 
-@push('scripts')
+
+<?php $__env->startPush('scripts'); ?>
 <script>
 	$(document).ready(function(){
 		$('#bt_add').click(function(){
@@ -124,5 +127,6 @@
 		evaluar();
 	}
 </script>
-@endpush			
-@endsection
+<?php $__env->stopPush(); ?>			
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.cpanelp', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
